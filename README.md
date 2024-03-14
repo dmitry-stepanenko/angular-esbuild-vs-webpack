@@ -1,27 +1,29 @@
-# Ngapp
+This repository demonstrates the difference in initial build times and incremental rebuilds
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+It contains 2 targets in "architect" section of angular.json: `build` (esbuild `application` builder) and `wpbuild` (webpack `browser` builder). Simply rename the one you need into build to test it.
 
-## Development server
+Personal observations for simple changes in components (no new imports, only console.logs or html elements added/removed):
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+esbuild `application` builder
+build 34,7s
 
-## Code scaffolding
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.ts - 16,9s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.html 12.6
+src/app/app0/lib2/childlib0/src/lib/childlib0.module.ts - 13.8s
+revert changes - 14,7s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.ts - 12.3s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.ts - 13.7s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.html - 11.5s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.html - 11.9s
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+webpack `browser` builder
+build 156s
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.ts - 6,2s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.html 2,9s
+src/app/app0/lib2/childlib0/src/lib/childlib0.module.ts - 9s
+revert changes - 3,4s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.ts - 2,7s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.ts - 2,73s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.html - 2,3s
+src/app/app0/lib2/childlib0/src/lib/lib2childlib0component0/lib2childlib0component0.component.html - 2,2s
